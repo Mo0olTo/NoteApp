@@ -1,0 +1,27 @@
+<Section class="container py-4">
+    <div class="flex items-start justify-center mx-auto w-4/5 sm:w-2/3 bg-sky-900 p-10 rounded-2xl min-h-[79vh]">
+        
+        <div class=" mt-10 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+            @for (note of notesData; track $index) {
+    
+                
+        <div class="flex flex-col min-w-[80%] min-h-[80%] bg-white hover:scale-110 transition-all duration-700 hover:shadow-yellow-600 hover:shadow-lg rounded-lg shadow-md shadow-white dark:bg-gray-800 dark:border-gray-700 m-4 p-3 sm:p-6">
+            <h1 class="text-2xl text-center mb-5 text-cyan-800 bg-yellow-500 rounded-lg shadow-sm shadow-cyan-800 w-1/4 self-center">{{$index + 1}}</h1>
+            <h4 class="self-start bg-cyan-700 px-3 py-1 text-white rounded-full text-lg font-[500] mb-3">Created At :</h4>
+            <h1 class="text-small font-[600] text-center mb-2 text-cyan-800">{{note.createdAt | date:"medium" }} </h1>
+            <h4 class="self-start bg-cyan-700 px-3 py-1 text-white rounded-full text-lg font-[500] mb-3">Title :</h4>
+           <p class="self-center mb-3 text-cyan-800  text-lg px-2 uppercase font-[700]">{{note.title}}</p>
+           <h4 class="self-start bg-cyan-700 px-3 py-1 text-white rounded-full text-lg font-[500] mb-3">Content :</h4>
+           <p class="text-center mb-3  text-cyan-800 font-[500] text-lg px-4">{{note.content}}</p>
+    
+            
+        </div>
+            }
+    
+        
+            </div>
+    
+
+  
+    </div>
+</Section>
