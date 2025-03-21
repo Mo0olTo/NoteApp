@@ -1,3 +1,4 @@
+import { FlowbiteService } from './../../core/services/flowbite/flowbite.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NoteService } from './../../core/services/note/note.service';
@@ -5,6 +6,7 @@ import { Component, ElementRef, inject, OnInit, PLATFORM_ID, ViewChild,  } from 
 import { ToastrService } from 'ngx-toastr';
 import { isPlatformBrowser } from '@angular/common';
 import { Inotes } from '../../shared/interfaces/inotes';
+import { initFlowbite } from 'flowbite';
 
 
 @Component({
@@ -19,13 +21,15 @@ export class HomeComponent implements OnInit{
   private readonly toastrService=inject(ToastrService)
   private readonly router=inject(Router)
   
+  
     private readonly plat_id=inject(PLATFORM_ID)
 
     @ViewChild("updateModal") myEl!:ElementRef;
+    
   
 
 
-
+    
     userNotes:Inotes[]=[]
     noteId:string='';
 
@@ -40,20 +44,22 @@ export class HomeComponent implements OnInit{
   })
 
 
+
+  constructor(private FlowbiteService: FlowbiteService) {}
+
+
+
   ngOnInit(): void {
 
-    
-    
+    this.FlowbiteService.loadFlowbite((flowbite) => {
+      initFlowbite();
+    });
     if(isPlatformBrowser(this.plat_id)){
       if(localStorage.getItem("userToken")!== null){
         this.getUserNotes();  
       }
     }
-
-   
-
-
-    
+  
   }
 
 
@@ -64,10 +70,7 @@ export class HomeComponent implements OnInit{
 
         if(res.msg==="done"){
           this.toastrService.success(res.msg , "Your Note Added")
-          
-        
-         
-          
+
 
         }
         console.log(res);
@@ -138,9 +141,7 @@ export class HomeComponent implements OnInit{
     })
   }
 
-  goToHome():void{
-    this.router.navigate(['/home'])
-  }
+
 
 
 }

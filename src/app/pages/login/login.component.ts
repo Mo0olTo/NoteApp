@@ -70,4 +70,8 @@ export class LoginComponent {
       
     }
 
+
+    newAccount():void{
+      this.router.navigate(['/register'])
+    }
 }
