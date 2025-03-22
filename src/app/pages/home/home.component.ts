@@ -71,6 +71,9 @@ export class HomeComponent implements OnInit{
         if(res.msg==="done"){
           this.toastrService.success(res.msg , "Your Note Added")
 
+          this.noteForm.reset();
+          this.getUserNotes();
+
 
         }
         console.log(res);
@@ -92,6 +95,7 @@ export class HomeComponent implements OnInit{
         
       },error:(err)=>{
         console.log(err);
+        this.userNotes=[]
         
       }
     })
@@ -137,8 +141,13 @@ export class HomeComponent implements OnInit{
       next:(res)=>{
         console.log(res);
         this.getUserNotes()
+      },error:(err)=>{
+        console.log(err);
+        this.userNotes=[];
+        
       }
     })
+
   }
 
 
